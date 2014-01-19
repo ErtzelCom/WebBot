@@ -119,22 +119,22 @@ public class WebBot extends JFrame implements ActionListener {
                                 param = obj.toString().replace("{\"method\":\"infoMsg\",\"params\":", "");
                                 param = param.substring(0,param.length()-1);
                                 obj = new JSONObject(param);                                         
-                                //obj.getString("channel"), "user")
-                            break;   
+                                //obj.getString("channel")
+                            break;    
                             case "chatMsg":           
                                 param = obj.toString().replace("{\"method\":\"chatMsg\",\"params\":", "");
                                 param = param.substring(0,param.length()-1);
                                 obj = new JSONObject(param);                 
                                 //obj.getString("channel"), obj.getString("name"), obj.getString("text"), obj.getString("role")
-                            break;   
+                            break;  
                         }
                     } catch(JSONException ex){               
                         String curTime = sdf.format(new Date());
                         trafficErr.append( "[" + curTime + "] " + "Exception: in onMessage " + ex.getMessage() + "\n" );
                         trafficErr.setCaretPosition( trafficErr.getDocument().getLength() );
                     }
-                };
-
+                };        
+                
                 @Override
                 public void onOpen( ServerHandshake handshake ) {
                     trafficIn.append( "You are connected to: " + getURI() + "\n" );
@@ -230,17 +230,6 @@ public class WebBot extends JFrame implements ActionListener {
                     + "}"
                 + "}";
                 sendMsg(json, 2000);
-                
-                json = "{"
-                    + "\"method\":\"chatMsg\","
-                    + "\"params\":{"
-                        + "\"channel\":\"" + myName + "\","
-                        + "\"name\":\"" + myName + "\","
-                        + "\"nameColor\":\"" + myColor + "\","
-                        + "\"text\":\"I am now meowing around in " + chanName + "'s channel!\""
-                    + "}"
-                + "}";
-                sendMsg(json, 6000);
             }
         }
     };
